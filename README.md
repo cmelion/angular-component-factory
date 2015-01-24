@@ -1,4 +1,4 @@
-angular-component-factory
+cmelion-component-factory
 =========================
 
 A very opinionated AngularJS decorator and provider inspired by the [web components proposal](http://www.w3.org/TR/components-intro/) to simplify use of directives as reusable components.
