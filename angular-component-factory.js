@@ -62,6 +62,6 @@
   };
 
   //Expose provider as a angular module
-  angular.module('kennethlynne.componentFactory', []).provider('componentFactory', componentFactoryProvider);
+  angular.module('cmelion.componentFactory', []).provider('componentFactory', componentFactoryProvider);
 
 }(angular));
