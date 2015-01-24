@@ -3,10 +3,9 @@ angular-component-factory [![Build Status](https://travis-ci.org/kennethlynne/an
 
 A very opinionated AngularJS decorator and provider inspired by the [web components proposal](http://www.w3.org/TR/components-intro/) to simplify use of directives as reusable components.
 
-See [demo](http://kennethlynne.github.io/angular-component-factory/), and view source.
 
 ## Usage
-To install: `bower install angular-component-factory`
+To install: `bower install cmelion-component-factory`
 
 Then add `componentFactory` as a dependancy to your module or decorate module using ```angular.componentFactory.moduleDecorator(<your module>)```
 
@@ -73,6 +72,7 @@ The factory will be served with two parameters: the snake cased component name, 
 The MIT License (MIT)
 
 Copyright (c) 2014 Kenneth Lynne
+Copyright (c) 2015 Charles Fulnecky
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -91,4 +91,3 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[![Analytics](https://ga-beacon.appspot.com/UA-46835353-1/angular-component-factory/README)](https://github.com/igrigorik/ga-beacon)
