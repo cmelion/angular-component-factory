@@ -6,15 +6,15 @@
         var componentBaseViewPath = 'views/components/';
 
         //Default component view path factory
-        var componentViewPathFactory = function (componentSnakeName, componentName) {
+        var componentViewPathFactory = function (componentSnakeName/*, componentName*/) {
             return componentBaseViewPath + componentSnakeName + '/' + componentSnakeName + '.html';
         };
 
         this.setViewPath = function (args) {
-            if (typeof args == 'string') {
+            if (typeof args === 'string') {
                 componentBaseViewPath = args;
             }
-            else if(typeof args == 'function')
+            else if(typeof args === 'function')
             {
                 componentViewPathFactory = args;
             }
@@ -24,7 +24,7 @@
 
             var componentSnakeName = componentName
                 .replace(/(?:[A-Z]+)/g, function (match) { //camelCase -> snake-case
-                    return "-" + match.toLowerCase();
+                    return '-' + match.toLowerCase();
                 })
                 .replace(/^-/, ''); // CamelCase -> -snake-case -> snake-case
 
@@ -33,17 +33,32 @@
                 replace: true,
                 scope: {},
                 restrict: 'E',
+                controller: componentName + 'ComponentCtrl',
+                controllerAs: 'vm',
                 componentSnakeName: componentSnakeName
             };
 
-            if(overrides && overrides.template) delete _default.templateUrl;
+            if (overrides){
+                if(overrides.template) {
+                    delete _default.templateUrl;
+                }
+
+                if(overrides.controller) {
+                    delete _default.controller;
+                }
+
+                if(overrides.controllerAs) {
+                    delete _default.controllerAs;
+                }
+            }
+
 
             return angular.extend(_default, overrides);
         };
 
         this.$get = function () {
             return componentFactory;
-        }
+        };
     };
 
     var decorateModule = function (module) {
@@ -79,6 +94,6 @@
     //Expose decorator
     angular.componentFactory = {
         moduleDecorator: decorateModule
-    }
+    };
 
 }(angular));
