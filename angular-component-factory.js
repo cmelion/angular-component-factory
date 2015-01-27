@@ -10,6 +10,8 @@
         };
 
         var componentFactory = function (componentName, overrides) {
+            overrides = overrides || {};
+
             var componentSnakeName = componentName
                 .replace(/(?:[A-Z]+)/g, function (match) { //camelCase -> snake-case
                     return '-' + match.toLowerCase();
@@ -26,8 +28,16 @@
                 componentSnakeName: componentSnakeName
             };
 
-            if(overrides && overrides.template) {
+            if(overrides.template) {
                 delete _default.templateUrl;
+            }
+
+            if(overrides.controller) {
+                delete _default.controller;
+            }
+
+            if(overrides.controllerAs) {
+                delete _default.controllerAs;
             }
 
             return angular.extend(_default, overrides);
