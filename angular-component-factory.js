@@ -2,26 +2,14 @@
     'use strict';
 
     var componentFactoryProvider = function () {
+        var _componentBaseViewPath = 'views/components/';
 
-        var componentBaseViewPath = 'views/components/';
-
-        //Default component view path factory
-        var componentViewPathFactory = function (componentSnakeName/*, componentName*/) {
-            return componentBaseViewPath + componentSnakeName + '/' + componentSnakeName + '.html';
-        };
-
-        this.setViewPath = function (args) {
-            if (typeof args === 'string') {
-                componentBaseViewPath = args;
-            }
-            else if(typeof args === 'function')
-            {
-                componentViewPathFactory = args;
-            }
+        // default component view path factory
+        var _componentViewPathFactory = function (componentSnakeName) {
+            return _componentBaseViewPath + componentSnakeName + '/' + componentSnakeName + '.html';
         };
 
         var componentFactory = function (componentName, overrides) {
-
             var componentSnakeName = componentName
                 .replace(/(?:[A-Z]+)/g, function (match) { //camelCase -> snake-case
                     return '-' + match.toLowerCase();
@@ -29,7 +17,7 @@
                 .replace(/^-/, ''); // CamelCase -> -snake-case -> snake-case
 
             var _default = {
-                templateUrl: componentViewPathFactory(componentSnakeName, componentName),
+                templateUrl: _componentViewPathFactory(componentSnakeName, componentName),
                 replace: true,
                 scope: {},
                 restrict: 'E',
@@ -38,22 +26,20 @@
                 componentSnakeName: componentSnakeName
             };
 
-            if (overrides){
-                if(overrides.template) {
-                    delete _default.templateUrl;
-                }
-
-                if(overrides.controller) {
-                    delete _default.controller;
-                }
-
-                if(overrides.controllerAs) {
-                    delete _default.controllerAs;
-                }
+            if(overrides && overrides.template) {
+                delete _default.templateUrl;
             }
 
-
             return angular.extend(_default, overrides);
+        };
+
+        this.setViewPath = function (args) {
+            if (typeof args === 'string') {
+                _componentBaseViewPath = args;
+            }
+            else if(typeof args === 'function') {
+                _componentViewPathFactory = args;
+            }
         };
 
         this.$get = function () {
@@ -61,8 +47,8 @@
         };
     };
 
-    var decorateModule = function (module) {
 
+    var decorateModule = function (module) {
         //We need to handle components that might be registered before angular has finished loading
         var queue = [];
         //This only pushes constructors to a queue, and when angular is ready it registers the directives
