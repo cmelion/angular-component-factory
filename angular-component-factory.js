@@ -32,14 +32,6 @@
                 delete _default.templateUrl;
             }
 
-            if(overrides.controller) {
-                delete _default.controller;
-            }
-
-            if(overrides.controllerAs) {
-                delete _default.controllerAs;
-            }
-
             return angular.extend(_default, overrides);
         };
 
